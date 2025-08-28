@@ -13,20 +13,36 @@
                 <!-- Form -->
                 <div class="row justify-content-center">
                     <div class="col-md-10 col-12">
-                        <form action="/loginSubmit" method="post">
+                        {{-- <form action="/loginSubmit" method="post"> --}}
+                        <form action="{{ route('login.submit') }}" method="POST" novalidate>
                         @csrf  
                         <div class="mb-3">
                             <label for="text_username" class="form-label">Username</label>
-                            <input class="form-control bg-dark text-info" type="text" name="text_username">
+                            <input class="form-control bg-dark text-info" type="text" name="text_username" value="{{ old('text_username') }}">
+                            @error('text_username')
+                                <div class="text-danger">{{ $message }} </div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label for="text_password" class="form-label">Password</label>
-                            <input class="form-control bg-dark text-info" type="text" name="text_password">
+                            <input class="form-control bg-dark text-info" type="password" name="text_password" value="{{ old('text_password') }}">
+                            @error('text_password')
+                                <div class="text-danger">{{ $message }} </div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <button class="btn btn-secondary w-100" type="submit">LOGIN</button>
                         </div>
                         </form>
+                        {{-- @if($errors->any())
+                            <div class="alert alert-danger mt-3">
+                                <ol class="m-0">
+                                    @foreach ($errors->all() as $error )
+                                        <li>{{ $error }} </li>
+                                    @endforeach
+                                </ol>
+                            </div>
+                        @endif --}}
                     </div>
                 </div>
 
