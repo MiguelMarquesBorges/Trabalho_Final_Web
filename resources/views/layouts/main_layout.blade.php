@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">
     <link rel="shortcut icon" href=" {{ asset('assets/images/favicon.png') }}">
 
-    <title>NOTES</title>
+    <title>FutAdmin</title>
 </head>
-<body>
+<body class="bg-white">
     
     @yield('content')
 

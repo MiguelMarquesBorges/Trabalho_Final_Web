@@ -5,33 +5,31 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6 col-sm-8">
-            <div class="card p-5">
-                <div class="text-center p-3">
-                    <img src="assets/images/logo.png" alt="Notes Logo">
+            <div class="card p-5 bg-light">
+                <div class="text-center p-3 ">
+                    <img src="assets/images/logo.png" class="img-fluid w-50" alt="FutAdmin Logo">
                 </div>
 
-                <!-- Form -->
                 <div class="row justify-content-center">
                     <div class="col-md-10 col-12">
-                        {{-- <form action="/loginSubmit" method="post"> --}}
                         <form action="{{ route('login.submit') }}" method="POST" novalidate>
                         @csrf  
                         <div class="mb-3">
-                            <label for="text_username" class="form-label">Username</label>
-                            <input class="form-control bg-dark text-info" type="text" name="text_username" value="{{ old('text_username') }}">
+                            <label for="text_username" class="form-label text-dark">Usuário</label>
+                            <input class="form-control bg-light text-dark" type="text" name="text_username" value="{{ old('text_username') }}">
                             @error('text_username')
                                 <div class="text-danger">{{ $message }} </div>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="text_password" class="form-label">Password</label>
-                            <input class="form-control bg-dark text-info" type="password" name="text_password" value="{{ old('text_password') }}">
+                            <label for="text_password" class="form-label text-dark">Senha</label>
+                            <input class="form-control bg-light text-dark" type="password" name="text_password" value="{{ old('text_password') }}">
                             @error('text_password')
                                 <div class="text-danger">{{ $message }} </div>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <button class="btn btn-secondary w-100" type="submit">LOGIN</button>
+                            <button class="btn btn-secondary w-100 text-white" type="submit">Entrar</button>
                         </div>
                         </form>
                         {{-- @if($errors->any())
@@ -47,7 +45,7 @@
                 </div>
 
                 <div class="text-center text-secondary">
-                    <small>&copy; <?= date('Y') ?> Notes</small>
+                    <small>&copy; <?= date('Y') ?> FutAdmin</small>
                 </div>
 
             </div>
