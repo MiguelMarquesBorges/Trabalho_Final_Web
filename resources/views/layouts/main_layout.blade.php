@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">
     <link rel="shortcut icon" href=" {{ asset('assets/images/favicon.png') }}">
 
-    <title>FutAdmin</title>
+    <title>Copa Do Rio Doce</title>
 </head>
 <body class="bg-white">
     

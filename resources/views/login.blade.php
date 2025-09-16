@@ -2,12 +2,12 @@
 
 @section('content')
 
-<div class="container mt-5">
+<div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-6 col-sm-8">
-            <div class="card p-5 bg-light">
+            <div class="card p-3 bg-white">
                 <div class="text-center p-3 ">
-                    <img src="assets/images/logo.png" class="img-fluid w-50" alt="FutAdmin Logo">
+                    <img src="assets/images/logo.png" class="img-fluid w-50" alt="Copa Do Rio Doce Logo">
                 </div>
 
                 <div class="row justify-content-center">
