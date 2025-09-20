@@ -57,17 +57,18 @@ class AuthController extends Controller
         session([
             'user' => [
                 'id' => $usuario->id,
-                'username' => $usuario->username
+                'username' => $usuario->username,
+                'role' => $usuario->funcao
             ]
             ]);
         
-            echo "Login realizado com sucesso!";
+            return view('home');
 
     }
 
     public function logout(){
         session()->forget('user');
-        return redirect()->route('login');
+        return redirect()->route('home');
     }
 
 

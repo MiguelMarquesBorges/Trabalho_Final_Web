@@ -32,20 +32,11 @@
                             <button class="btn btn-secondary w-100 text-white" type="submit">Entrar</button>
                         </div>
                         </form>
-                        {{-- @if($errors->any())
-                            <div class="alert alert-danger mt-3">
-                                <ol class="m-0">
-                                    @foreach ($errors->all() as $error )
-                                        <li>{{ $error }} </li>
-                                    @endforeach
-                                </ol>
-                            </div>
-                        @endif --}}
                     </div>
                 </div>
 
                 <div class="text-center text-secondary">
-                    <small>&copy; <?= date('Y') ?> FutAdmin</small>
+                    <small>&copy; <?= date('Y') ?> Copa Do Rio Doce</small>
                 </div>
 
             </div>
