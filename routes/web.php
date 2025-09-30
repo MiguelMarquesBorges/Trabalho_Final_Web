@@ -8,7 +8,7 @@ use App\Http\Middleware\CheckIsNotLogged;
 
 
 
-Route::middleware([CheckIsLogged::class])->group(
+Route::middleware([CheckIsNotLogged::class])->group(
 
     function(){
         Route::GET('/login', [AuthController::class, 'login'])->name('login');
@@ -16,7 +16,7 @@ Route::middleware([CheckIsLogged::class])->group(
     }
 );
 
-Route::middleware([CheckIsNotLogged::class])->group(
+Route::middleware([CheckIsLogged::class])->group(
 
     function(){
         Route::GET('/logout', [AuthController::class, 'logout'])->name('logout');
