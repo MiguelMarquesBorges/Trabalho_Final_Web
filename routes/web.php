@@ -13,6 +13,10 @@ Route::middleware([CheckIsNotLogged::class])->group(
     function(){
         Route::GET('/login', [AuthController::class, 'login'])->name('login');
         Route::POST('/loginSubmit', [AuthController::class, 'loginSubmit'])->name('login.submit');
+        
+        Route::GET('/signin', [AuthController::class, 'signIn'])->name('signin');
+        Route::POST('/signInSubmit', [AuthController::class, 'signInSubmit'])->name('signin.submit');
+
     }
 );
 

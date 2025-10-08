@@ -22,7 +22,7 @@
                     Login
                 </a>
 
-                <a href="{{ route('login') }}" class="btn btn-light">
+                <a href="{{ route('signin') }}" class="btn btn-light">
                     Criar ADM
                 </a>
             @endif

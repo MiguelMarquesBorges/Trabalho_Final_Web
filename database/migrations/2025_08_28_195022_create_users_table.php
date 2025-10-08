@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id()->autoincrement();
-            $table->string('username', 50)->nullable();
+            $table->string('username', 50)->nullable()->unique();
             $table->string('password', 200)->nullable();
             $table->dateTime('last_login')->nullable();
             $table->timestamps(); //created_it: e updated_it:
