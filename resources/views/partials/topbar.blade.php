@@ -17,6 +17,10 @@
                     @csrf
                     <button type="submit" class="btn btn-danger">Sair</button>
                 </form>
+
+                <a href="{{ route('listAdmins') }}" class="btn btn-light mb-2">
+                    Listar ADMs
+                </a>
             @else
                 <a href="{{ route('login') }}" class="btn btn-light mb-2">
                     Login

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckIsLogged;
 use App\Http\Middleware\CheckIsNotLogged;
 
@@ -14,8 +15,8 @@ Route::middleware([CheckIsNotLogged::class])->group(
         Route::GET('/login', [AuthController::class, 'login'])->name('login');
         Route::POST('/loginSubmit', [AuthController::class, 'loginSubmit'])->name('login.submit');
         
-        Route::GET('/signin', [AuthController::class, 'signIn'])->name('signin');
-        Route::POST('/signInSubmit', [AuthController::class, 'signInSubmit'])->name('signin.submit');
+        Route::GET('/signin', [UserController::class, 'signIn'])->name('signin');
+        Route::POST('/signInSubmit', [UserController::class, 'createUser'])->name('signin.submit');
 
     }
 );
@@ -24,6 +25,7 @@ Route::middleware([CheckIsLogged::class])->group(
 
     function(){
         Route::GET('/logout', [AuthController::class, 'logout'])->name('logout');
+        // Route::GET('/listAdmins', [UserController::class, 'list'])->name('listAdmins');
     }
 );
 
