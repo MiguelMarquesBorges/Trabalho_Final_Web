@@ -53,11 +53,7 @@ class UserController extends Controller
 
         $username = $request->text_username;
         $password = Hash::make($request->text_password);
-
         
-
-        
-
         return redirect('/home')->with('sucess', 'Usuário editado com sucesso!');
     }
 

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\LoginRequest;
 
 class AuthController extends Controller
 {
@@ -14,7 +14,7 @@ class AuthController extends Controller
         return view('user.login');
     }
 
-    public function loginSubmit(UserRequest $request){
+    public function loginSubmit(LoginRequest $request){
 
         $request->validated();
 
