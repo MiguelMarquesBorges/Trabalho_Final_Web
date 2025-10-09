@@ -16,10 +16,8 @@ class TimesController extends Controller
             'logo' => 'required|image|mimes:png|max:2048',
         ]);
 
-        // salva o arquivo
         $logoPath = $request->file('logo')->store('logos', 'public');
 
-        // cria o registro
         \App\Models\Team::create([
             'id' => $request->id,
             'nome' => $request->nome,
@@ -33,19 +31,19 @@ class TimesController extends Controller
 
     public function index()
     {
-        $times = \App\Models\Time::all();
+        $times = \App\Models\Team::all();
         return view('times_list', compact('times'));
     }
 
     public function removeView()
     {
-        $times = \App\Models\Time::all();
+        $times = \App\Models\Team::all();
         return view('times_remove', compact('times'));
     }
 
     public function destroy($id)
     {
-        $time = \App\Models\Time::findOrFail($id);
+        $time = \App\Models\Team::findOrFail($id);
 
         // Apagar o arquivo de logo
         if ($time->logo_path && \Storage::disk('public')->exists($time->logo_path)) {
@@ -58,20 +56,19 @@ class TimesController extends Controller
     }
     public function edit($id)
     {
-        $time = \App\Models\Time::findOrFail($id);
+        $time = \App\Models\Team::findOrFail($id);
         return view('times_edit', compact('time'));
     }
 
     public function update(Request $request, $id)
     {
-        $time = \App\Models\Time::findOrFail($id);
+        $time = \App\Models\Team::findOrFail($id);
 
-        // Validação
         $request->validate([
             'nome' => 'required|string|max:255',
             'sigla' => 'required|string|max:5',
             'adm_id' => 'required|integer',
-            'logo' => 'nullable|image|mimes:png|max:2048', // opcional
+            'logo' => 'nullable|image|mimes:png|max:2048',
         ], [
             'nome.required' => 'O nome do time é obrigatório.',
             'sigla.required' => 'A sigla é obrigatória.',
@@ -79,19 +76,15 @@ class TimesController extends Controller
             'logo.image' => 'A logo deve ser um arquivo PNG válido.',
         ]);
 
-        // Atualiza dados
         $time->nome = $request->nome;
         $time->sigla = strtoupper($request->sigla);
         $time->adm_id = $request->adm_id;
 
-        // Se o usuário enviar nova logo, substitui a antiga
         if ($request->hasFile('logo')) {
-            // Apagar logo antiga, se existir
             if ($time->logo_path && \Storage::disk('public')->exists($time->logo_path)) {
                 \Storage::disk('public')->delete($time->logo_path);
             }
 
-            // Salvar nova logo
             $path = $request->file('logo')->store('logos', 'public');
             $time->logo_path = $path;
         }
