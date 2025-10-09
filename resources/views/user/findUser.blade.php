@@ -7,7 +7,8 @@
     <title>Procurando Usuário pelo ID</title>
 </head>
 <body>
-    ID: {{$user->id}}
+
+    ID: {{$user->id}}<br>
     Nome: {{$user->username}}
 </body>
 </html>

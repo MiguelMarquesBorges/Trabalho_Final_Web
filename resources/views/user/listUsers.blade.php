@@ -11,7 +11,10 @@
     
     @forelse($users as $user)
         ID: {{ $user->id }}<br>
-        Nome: {{ $user->username }}<br><hr>
+        Nome: {{ $user->username }}<br>
+        <a href = "{{ route('findAdmin', ['user' => $user->id]) }}">Ver usuário</a><br>
+        <a href = "{{ route('updateAdmin', ['user' => $user->id]) }}">Editar usuário</a><br>
+        <hr>
     @empty
     @endforelse
 

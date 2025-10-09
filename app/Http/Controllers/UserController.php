@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -14,24 +15,9 @@ class UserController extends Controller
         return view('user.signin');
     }
 
-    public function createUser(Request $request){
+    public function createUser(UserRequest $request){
 
-        $request->validate([
-            'text_username' => 'required|email',
-            'text_password' => 'required|min:6|max:12',
-        ],
-        [
-            //Mensagem para text_username
-            'text_username.required' => 'O campo de e-mail é obrigatório',
-            'text_username.email' => 'O campo de e-mail deve conter um endereço válido',
-
-            //Mensagem para text_password
-            'text_password.required' => 'A senha é obrigatória',
-            'text_password.min' => 'A senha deve ter pelo menos :min caracteres',
-            'text_password.max' => 'A senha deve ter no máximo :max caracteres',
-
-        ]
-    );
+    $request->validated();
 
     $username = $request->text_username;
     $password = Hash::make($request->password);
@@ -56,6 +42,15 @@ class UserController extends Controller
 
     public function find(User $user){
         return view('user.findUser', ['user' => $user]);
+    }
+
+    public function update(User $user){
+        return view('user.updateUser', ['user' => $user]);
+    }
+
+    public function updateUser(UserRequest $request, User $user){
+        $request->validated();
+        dd($user);
     }
 
     
