@@ -31,6 +31,11 @@ Route::middleware([CheckIsLogged::class])->group(
 
 Route::get('/times/create', [TimeController::class, 'create'])->name('times.create');
 Route::post('/times/store', [TimeController::class, 'store'])->name('times.store');
+Route::get('/times', [TimeController::class, 'index'])->name('times.list');
+Route::get('/times/remove', [TimeController::class, 'removeView'])->name('times.remove');
+Route::delete('/times/{id}', [TimeController::class, 'destroy'])->name('times.destroy');
+Route::get('/times/{id}/edit', [TimeController::class, 'edit'])->name('times.edit');
+Route::put('/times/{id}', [TimeController::class, 'update'])->name('times.update');
 
 Route::GET('/home', [MainController::class, 'home'])->name('home');
 

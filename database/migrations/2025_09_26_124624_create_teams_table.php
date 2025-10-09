@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id()->autoincrement();
             $table->string('team_name', 20);
             $table->binary('team_symbol');
+            $table->id("id_admin");
         });
     }
 
