@@ -1,10 +1,15 @@
 <?php
 
-namespace App\Models\Models;
+namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Team extends Model
+class Time extends Model
 {
-    //
+    use HasFactory;
+
+    protected $table = 'times';
+    protected $fillable = ['id', 'nome', 'sigla', 'adm_id', 'logo_path'];
+    public $timestamps = false;
 }
