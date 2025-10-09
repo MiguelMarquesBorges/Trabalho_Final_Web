@@ -34,7 +34,7 @@ Route::GET('/home', [MainController::class, 'home'])->name('home');
 Route::GET('/listAdmins', [UserController::class, 'list'])->name('listAdmins');
 Route::GET('/findAdmin/{user}', [UserController::class, 'find'])->name('findAdmin');
 
-Route::GET('/updateAdmin/{user}', [UserController::class, 'update'])->name('updateAdmin');
+Route::MATCH(['get','post', 'put'], '/updateAdmin/{user}', [UserController::class, 'update'])->name('updateAdmin');
 Route::PUT('/updateUserSubmit', [UserController::class, 'updateUser'])->name('updateUser.submit');
 
 

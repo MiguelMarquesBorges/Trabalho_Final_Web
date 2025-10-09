@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Http\Requests\UserRequest;
 
 class AuthController extends Controller
 {
@@ -13,27 +14,12 @@ class AuthController extends Controller
         return view('user.login');
     }
 
-    public function loginSubmit(Request $request){
+    public function loginSubmit(UserRequest $request){
 
-        $request->validate([
-            'text_username' => 'required|email',
-            'text_password' => 'required|min:6|max:12',
-        ],
-        [
-            //Mensagem para text_username
-            'text_username.required' => 'O campo de e-mail é obrigatório',
-            'text_username.email' => 'O campo de e-mail deve conter um endereço válido',
+        $request->validated();
 
-            //Mensagem para text_password
-            'text_password.required' => 'A senha é obrigatória',
-            'text_password.min' => 'A senha deve ter pelo menos :min caracteres',
-            'text_password.max' => 'A senha deve ter no máximo :max caracteres',
-
-        ]
-    );
-
-        $username = $request->input('text_username');
-        $password = $request->input('text_password');
+        $username = $request->text_username;
+        $password = $request->text_password;
 
         //Testar se o usuario é válido
         $usuario = User::where('username',$username)

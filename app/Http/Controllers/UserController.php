@@ -50,7 +50,15 @@ class UserController extends Controller
 
     public function updateUser(UserRequest $request, User $user){
         $request->validated();
-        dd($user);
+
+        $username = $request->text_username;
+        $password = Hash::make($request->text_password);
+
+        
+
+        
+
+        return redirect('/home')->with('sucess', 'Usuário editado com sucesso!');
     }
 
     
