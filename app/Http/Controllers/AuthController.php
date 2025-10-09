@@ -30,7 +30,7 @@ class AuthController extends Controller
             'text_password.max' => 'A senha deve ter no máximo :max caracteres',
 
         ]
-    );
+        );
 
         $username = $request->input('text_username');
         $password = $request->input('text_password');
@@ -45,30 +45,30 @@ class AuthController extends Controller
                 ->with('login_error','Usuário ou senha incorretos.');
         }
         
-        if(!password_verify($password, $usuario->password)){
-            return redirect()->back()
-                             ->withInput()
-                             ->with('login_error','Usuário ou senha incorretos.');
-        }
+    //     if(!password_verify($password, $usuario->password)){
+    //         return redirect()->back()
+    //                          ->withInput()
+    //                          ->with('login_error','Usuário ou senha incorretos.');
+    //     }
 
-        $usuario->last_login = Date('Y-m-d H:i:s');
-        $usuario->save();
+    //     $usuario->last_login = Date('Y-m-d H:i:s');
+    //     $usuario->save();
 
-        session([
-            'user' => [
-                'id' => $usuario->id,
-                'username' => $usuario->username,
-                'role' => $usuario->funcao
-            ]
-            ]);
+    //     session([
+    //         'user' => [
+    //             'id' => $usuario->id,
+    //             'username' => $usuario->username,
+    //             'role' => $usuario->funcao
+    //         ]
+    //         ]);
         
-            return redirect()->route('home');
+    //         return redirect()->route('home');
 
-    }
+    // }
 
-    public function logout(){
-        session()->forget('user');
-        return redirect()->route('home');
+    // public function logout(){
+    //     session()->forget('user');
+    //     return redirect()->route('home');
     }
 
 
