@@ -14,9 +14,7 @@ class AuthController extends Controller
         return view('user.login');
     }
 
-    public function loginSubmit(LoginRequest $request){
-
-        $request->validated();
+    public function loginSubmit(Request $request){
 
         $username = $request->text_username;
         $password = $request->text_password;
@@ -48,7 +46,7 @@ class AuthController extends Controller
             ]
             ]);
         
-            return redirect()->route('/home');
+            return redirect()->route('home');
 
     }
 

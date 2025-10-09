@@ -13,10 +13,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('teams', function (Blueprint $table) {
-            $table->id()->autoincrement();
+            $table->id()->autoIncrement();
             $table->string('team_name', 20);
-            $table->binary('team_symbol');
-            $table->id("id_admin");
+            $table->string('team_sigle',20);
+            $table->binary('team_symbol')->nullable();
+            $table->foreign('id_admin')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

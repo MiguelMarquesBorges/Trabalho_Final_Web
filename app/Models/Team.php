@@ -9,7 +9,7 @@ class Team extends Model
 {
     use HasFactory;
 
-    protected $table = 'times';
-    protected $fillable = ['id', 'nome', 'sigla', 'adm_id', 'logo_path'];
+    protected $table = 'teams';
+    protected $fillable = ['id', 'nome', 'sigla', 'id_adm', 'logo_path'];
     public $timestamps = false;
 }

@@ -3,47 +3,51 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-class TimesController extends Controller
+use App\Models\Team;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+class TeamsController extends Controller
 {
+    public function create()
+    {
+        return view("times.create");
+    }
     public function store(Request $request)
     {
-        $request->validate([
-            'id' => 'required|integer|unique:times,id',
-            'nome' => 'required|string|max:255',
-            'sigla' => 'required|string|max:5',
-            'adm_id' => 'required|integer|exists:users,id',
-            'logo' => 'required|image|mimes:png|max:2048',
-        ]);
 
-        $logoPath = $request->file('logo')->store('logos', 'public');
+        $logoPath = null;
 
-        \App\Models\Team::create([
+        if ($request->hasFile('team_symbol')) {
+            $logoPath = $request->file('team_symbol')->store('teams', 'public');
+        }
+
+        Team::create([
             'id' => $request->id,
-            'nome' => $request->nome,
-            'sigla' => strtoupper($request->sigla),
-            'adm_id' => $request->adm_id,
-            'logo_path' => $logoPath,
+            'team_name' => $request->nome,
+            'team_sigle' => strtoupper($request->sigla),
+            'id_adm' => $request->adm_id,
+            'team_symbol' => $logoPath,
         ]);
 
-        return redirect()->route('times.index')->with('success', 'Time cadastrado com sucesso!');
+
+        return redirect()->route('times.create')->with('success', 'Time cadastrado com sucesso!');
     }
 
     public function index()
     {
-        $times = \App\Models\Team::all();
-        return view('times_list', compact('times'));
+        $times = Team::all();
+        return view('times.list', compact('times'));
     }
 
     public function removeView()
     {
-        $times = \App\Models\Team::all();
-        return view('times_remove', compact('times'));
+        $times = Team::all();
+        return view('times.remove', compact('times'));
     }
 
     public function destroy($id)
     {
-        $time = \App\Models\Team::findOrFail($id);
+        $time = Team::findOrFail($id);
 
         // Apagar o arquivo de logo
         if ($time->logo_path && \Storage::disk('public')->exists($time->logo_path)) {
@@ -56,13 +60,13 @@ class TimesController extends Controller
     }
     public function edit($id)
     {
-        $time = \App\Models\Team::findOrFail($id);
-        return view('times_edit', compact('time'));
+        $time = Team::findOrFail($id);
+        return view('times.edit', compact('time'));
     }
 
     public function update(Request $request, $id)
     {
-        $time = \App\Models\Team::findOrFail($id);
+        $time = Team::findOrFail($id);
 
         $request->validate([
             'nome' => 'required|string|max:255',

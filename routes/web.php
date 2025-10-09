@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\TimesController;
+use App\Http\Controllers\TeamsController;
 use App\Http\Middleware\CheckIsLogged;
 use App\Http\Middleware\CheckIsNotLogged;
 
@@ -26,13 +26,13 @@ Route::middleware([CheckIsLogged::class])->group(
 
     function () {
         Route::GET('/logout', [AuthController::class, 'logout'])->name('logout');
-        Route::get('/times/create', [TimesController::class, 'create'])->name('times.create');
-        Route::post('/times/store', [TimesController::class, 'store'])->name('times.store');
-        Route::get('/times', [TimesController::class, 'index'])->name('times.list');
-        Route::get('/times/remove', [TimesController::class, 'removeView'])->name('times.remove');
-        Route::delete('/times/{id}', [TimesController::class, 'destroy'])->name('times.destroy');
-        Route::get('/times/{id}/edit', [TimesController::class, 'edit'])->name('times.edit');
-        Route::put('/times/{id}', [TimesController::class, 'update'])->name('times.update');
+        Route::get('/times/create', [TeamsController::class, 'create'])->name('times.create');
+        Route::post('/times/store', [TeamsController::class, 'store'])->name('times.store');
+        Route::get('/times', [TeamsController::class, 'index'])->name('times.list');
+        Route::get('/times/remove', [TeamsController::class, 'removeView'])->name('times.remove');
+        Route::delete('/times/{id}', [TeamsController::class, 'destroy'])->name('times.destroy');
+        Route::get('/times/{id}/edit', [TeamsController::class, 'edit'])->name('times.edit');
+        Route::put('/times/{id}', [TeamsController::class, 'update'])->name('times.update');
 
     }
 );

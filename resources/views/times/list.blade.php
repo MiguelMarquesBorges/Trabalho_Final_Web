@@ -1,4 +1,4 @@
-@extends('layouts.layout_main')
+@extends('layouts.main_layout')
 
 @section('title', 'Listar Times - Copa do Rio Doce')
 
@@ -38,9 +38,7 @@
                                     <tr>
                                         <td>{{ $time->id }}</td>
                                         <td>
-                                            <img src="{{ asset('storage/' . $time->logo_path) }}" 
-                                                 alt="Logo" class="rounded" 
-                                                 style="width: 40px; height: 40px;">
+                                            <img src="{{ asset('storage/'.$team->team_symbol) }}" alt="Logo do Time">
                                         </td>
                                         <td>{{ $time->nome }}</td>
                                         <td>{{ $time->sigla }}</td>
