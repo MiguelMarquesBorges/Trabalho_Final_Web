@@ -25,10 +25,12 @@ Route::middleware([CheckIsLogged::class])->group(
 
     function(){
         Route::GET('/logout', [AuthController::class, 'logout'])->name('logout');
-        // Route::GET('/listAdmins', [UserController::class, 'list'])->name('listAdmins');
+        
     }
 );
 
 Route::GET('/home', [MainController::class, 'home'])->name('home');
-
+Route::GET('/listAdmins', [UserController::class, 'list'])->name('listAdmins');
+Route::GET('/findAdmin/{user}', [UserController::class, 'find'])->name('find');
+Route::GET('/editAdmin/{user}', [UserController::class, 'edit'])->name('edit');
 

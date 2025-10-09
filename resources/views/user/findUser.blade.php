@@ -4,17 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lista de Usuários</title>
+    <title>Procurando Usuário pelo ID</title>
 </head>
 <body>
-
-    
-    @forelse($users as $user)
-        ID: {{ $user->id }}<br>
-        Nome: {{ $user->username }}<br><hr>
-    @empty
-    @endforelse
-
-    
+    ID: {{$user->id}}
+    Nome: {{$user->username}}
 </body>
 </html>

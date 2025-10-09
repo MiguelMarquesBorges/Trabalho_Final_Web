@@ -49,4 +49,15 @@ class UserController extends Controller
 
     }
 
+    public function list(){
+        $users = User::orderByDesc('created_at')->get();
+        return view('user.listUsers', ['users' => $users]);
+    }
+
+    public function find(User $user){
+        return view('user.findUser', ['user' => $user]);
+    }
+
+    
+
 }
