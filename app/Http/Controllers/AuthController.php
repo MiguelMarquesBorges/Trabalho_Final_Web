@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Http\Requests\LoginRequest;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -29,10 +30,10 @@ class AuthController extends Controller
                 ->with('login_error','Usuário ou senha incorretos.');
         }
         
-        if(!password_verify($password, $usuario->password)){
+        if (!$usuario || !Hash::check($request->text_password, $usuario->password)) {
             return redirect()->back()
                              ->withInput()
-                             ->with('login_error','Usuário ou senha incorretos.');
+                             ->with('login_error', 'Usuário ou senha incorretos.');
         }
 
         $usuario->last_login = Date('Y-m-d H:i:s');
@@ -41,11 +42,10 @@ class AuthController extends Controller
         session([
             'user' => [
                 'id' => $usuario->id,
-                'username' => $usuario->username,
-                'role' => $usuario->funcao
+                'username' => $usuario->username
             ]
             ]);
-        
+
             return redirect()->route('home');
 
     }

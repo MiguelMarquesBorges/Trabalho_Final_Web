@@ -13,19 +13,18 @@ use App\Http\Middleware\CheckIsNotLogged;
 Route::middleware([CheckIsNotLogged::class])->group(
 
     function () {
-        Route::GET('/login', [AuthController::class, 'login'])->name('login');
-        Route::POST('/loginSubmit', [AuthController::class, 'loginSubmit'])->name('login.submit');
-
         Route::GET('/signin', [UserController::class, 'signIn'])->name('signin');
         Route::POST('/signInSubmit', [UserController::class, 'createUser'])->name('signin.submit');
-
+        Route::POST('/loginSubmit', [AuthController::class, 'loginSubmit'])->name('login.submit');
+        Route::GET('/login', [AuthController::class, 'login'])->name('login');
+        
     }
 );
 
 Route::middleware([CheckIsLogged::class])->group(
-
+    
     function () {
-        Route::GET('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::POST('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/times/create', [TeamsController::class, 'create'])->name('times.create');
         Route::post('/times/store', [TeamsController::class, 'store'])->name('times.store');
         Route::get('/times', [TeamsController::class, 'index'])->name('times.list');
@@ -33,13 +32,13 @@ Route::middleware([CheckIsLogged::class])->group(
         Route::delete('/times/{id}', [TeamsController::class, 'destroy'])->name('times.destroy');
         Route::get('/times/{id}/edit', [TeamsController::class, 'edit'])->name('times.edit');
         Route::put('/times/{id}', [TeamsController::class, 'update'])->name('times.update');
-
+        
     }
 );
 
 
-Route::GET('/home', [MainController::class, 'home'])->name('home');
 
+Route::GET('/home', [MainController::class, 'home'])->name('home');
 Route::GET('/listAdmins', [UserController::class, 'list'])->name('listAdmins');
 Route::GET('/findAdmin/{user}', [UserController::class, 'find'])->name('findAdmin');
 

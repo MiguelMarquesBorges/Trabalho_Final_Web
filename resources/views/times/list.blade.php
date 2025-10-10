@@ -38,7 +38,7 @@
                                     <tr>
                                         <td>{{ $time->id }}</td>
                                         <td>
-                                            <img src="{{ asset('storage/'.$team->team_symbol) }}" alt="Logo do Time">
+                                            <img src="data:image/png;base64,{{ base64_encode($team->team_symbol) }}" alt="Logo do Time">
                                         </td>
                                         <td>{{ $time->nome }}</td>
                                         <td>{{ $time->sigla }}</td>

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('team_name', 20);
             $table->string('team_sigle',20);
             $table->binary('team_symbol')->nullable();
-            $table->foreign('id_admin')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

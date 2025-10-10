@@ -14,23 +14,26 @@ class TeamsController extends Controller
     }
     public function store(Request $request)
     {
+        $request->validate([
+            'nome' => 'required|string|max:20',
+            'sigla' => 'required|string|max:5',
+            'team_symbol' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-        $logoPath = null;
-
+        $logoData = null;
         if ($request->hasFile('team_symbol')) {
-            $logoPath = $request->file('team_symbol')->store('teams', 'public');
+            $logoData = file_get_contents($request->file('team_symbol')->getRealPath());
         }
 
         Team::create([
-            'id' => $request->id,
-            'team_name' => $request->nome,
-            'team_sigle' => strtoupper($request->sigla),
-            'id_adm' => $request->adm_id,
-            'team_symbol' => $logoPath,
+            'team_name'   => $request->nome,
+            'team_sigle'  => strtoupper($request->sigla),
+            'id_adm'      => $request->adm_id,
+            'team_symbol' => $logoData,
         ]);
 
 
-        return redirect()->route('times.create')->with('success', 'Time cadastrado com sucesso!');
+        return redirect()->route('times.index')->with('success', 'Time cadastrado com sucesso!');
     }
 
     public function index()

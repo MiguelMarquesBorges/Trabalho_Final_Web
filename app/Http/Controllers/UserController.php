@@ -17,21 +17,16 @@ class UserController extends Controller
 
     public function createUser(UserRequest $request){
 
-    $request->validated();
-
     $username = $request->text_username;
     $password = Hash::make($request->password);
 
-    DB::table('users')->insert([
-            [
-                'username'  =>  $username,
-                'password'  =>  $password,
-                'created_at'    => now(),
-            ]
-        ]
-    );
+    User::create([
+        'username' => $request->text_username,
+        'password' => Hash::make($request->password),
+    ]);
 
-    return redirect('/home')->with('sucess', 'Usuário cadastrado com sucesso!');
+
+    return redirect('/home')->with('success', 'Usuário cadastrado com sucesso!');
 
     }
 
@@ -46,6 +41,7 @@ class UserController extends Controller
 
     public function update(User $user){
         return view('user.updateUser', ['user' => $user]);
+        $user->save();
     }
 
     public function updateUser(UserRequest $request, User $user){
@@ -54,7 +50,7 @@ class UserController extends Controller
         $username = $request->text_username;
         $password = Hash::make($request->text_password);
         
-        return redirect('/home')->with('sucess', 'Usuário editado com sucesso!');
+        return redirect('/home')->with('success', 'Usuário editado com sucesso!');
     }
 
     
