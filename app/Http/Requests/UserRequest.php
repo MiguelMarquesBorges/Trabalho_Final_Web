@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UserRequest extends FormRequest
 {
@@ -21,27 +22,32 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-
-        $userId = $this->route('user');
+        $user = $this->route('id'); // Pode ser null (create) ou um objeto (edit)
 
         return [
-            'text_username' => 'required|email|unique:users,username,'.($userId ? $userId : null),
-            'text_password' => 'required|min:6|max:12',
+            'text_username' => [
+                'required',
+                'email',
+                Rule::unique('users', 'username')->ignore($user),
+            ],
+            'text_password' => $this->isMethod('post')
+                ? 'required|min:6|max:12'
+                : 'nullable|min:6|max:12',
         ];
     }
 
-    public function messages(): array{
-        return[
-            //Mensagem para text_username
+    public function messages(): array
+    {
+        return [
+            // username
             'text_username.required' => 'O campo de e-mail é obrigatório',
             'text_username.email' => 'O campo de e-mail deve conter um endereço válido',
             'text_username.unique' => 'Este e-mail já está em uso.',
 
-            //Mensagem para text_password
+            // password
             'text_password.required' => 'A senha é obrigatória',
             'text_password.min' => 'A senha deve ter pelo menos :min caracteres',
             'text_password.max' => 'A senha deve ter no máximo :max caracteres',
-
         ];
     }
 }

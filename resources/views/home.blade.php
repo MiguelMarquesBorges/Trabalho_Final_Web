@@ -6,8 +6,8 @@
     @include('partials.topbar')
     @include('partials.navbar')
     
-    @if(session('sucess'))
-        <p>{{session('sucess')}}</p>
+    @if(session('success'))
+        <p>{{session('success')}}</p>
     @endif
 
 @endsection

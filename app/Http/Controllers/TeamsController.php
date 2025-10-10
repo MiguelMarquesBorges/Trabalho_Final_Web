@@ -28,7 +28,6 @@ class TeamsController extends Controller
         Team::create([
             'team_name'   => $request->nome,
             'team_sigle'  => strtoupper($request->sigla),
-            'id_adm'      => $request->adm_id,
             'team_symbol' => $logoData,
         ]);
 

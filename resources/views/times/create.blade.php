@@ -18,27 +18,22 @@
 
                     <div class="mb-3">
                         <label for="id" class="form-label">ID do Time</label>
-                        <input type="number" name="id" id="id" class="form-control" required>
+                        <input type="number" name="team_id" id="team_id" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome do Time</label>
-                        <input type="text" name="nome" id="nome" class="form-control" required>
+                        <input type="text" name="team_name" id="team_name" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="sigla" class="form-label">Sigla</label>
-                        <input type="text" name="sigla" id="sigla" maxlength="5" class="form-control" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="adm_id" class="form-label">ID do ADM</label>
-                        <input type="number" name="adm_id" id="adm_id" class="form-control" required>
+                        <input type="text" name="team_sigle" id="team_sigle" maxlength="5" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="logo" class="form-label">Logo do Time (PNG)</label>
-                        <input type="file" name="logo" id="logo" accept="image/png" class="form-control" required>
+                        <input type="file" name="team_logo" id="team_logo" accept="image/png" class="form-control" required>
                     </div>
 
                     <div class="d-flex justify-content-end">

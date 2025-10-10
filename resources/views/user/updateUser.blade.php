@@ -12,7 +12,7 @@
 
                 <div class="row justify-content-center">
                     <div class="col-md-10 col-12">
-                        <form action="{{ route('updateUser.submit', ['user' => $user->id] ) }}" method="POST" novalidate>
+                        <form action="{{ route('updateUser.submit', ['id' => $user->id]) }}" method="POST" novalidate>
                         @csrf  
                         @method('PUT')
                         <div class="mb-3">
