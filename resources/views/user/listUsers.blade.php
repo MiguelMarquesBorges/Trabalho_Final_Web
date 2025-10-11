@@ -5,7 +5,7 @@
     <div class="card shadow-lg border-0 rounded-3">
         <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
             <h4 class="mb-0">Lista de Administradores</h4>
-            <a href="{{ url()->previous() }}" class="btn btn-light btn-sm">
+            <a href="{{ url()->previous() }}" class="btn btn-light me-2">
                 <i class="bi bi-arrow-left"></i> Voltar
             </a>
         </div>
@@ -20,10 +20,10 @@
                         </div>
 
                         <div class="d-flex gap-2">
-                            <a href="{{ route('findAdmin', ['user' => $user->id]) }}" class="btn btn-sm btn-light">
+                            <a href="{{ route('findAdmin', ['user' => $user->id]) }}" class="btn me-2 btn-light">
                                 <i class="bi bi-eye"></i> Ver
                             </a>
-                            <a href="{{ route('updateAdmin', ['user' => $user->id]) }}" class="btn btn-sm btn-light">
+                            <a href="{{ route('updateAdmin', ['user' => $user->id]) }}" class="btn me-2 btn-light">
                                 <i class="bi bi-pencil-square"></i> Editar
                             </a>
                         </div>
