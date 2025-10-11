@@ -1,4 +1,4 @@
-@extends('layouts.layout_main')
+@extends('layouts.main_layout')
 
 @section('title', 'Editar Time - Copa do Rio Doce')
 
@@ -17,37 +17,24 @@
                     @csrf
                     @method('PUT')
 
-                    <!-- Nome -->
                     <div class="mb-3">
-                        <label for="nome" class="form-label">Nome do Time</label>
-                        <input type="text" name="nome" id="nome" class="form-control" value="{{ $time->nome }}" required>
+                        <label for="team_name" class="form-label">Nome do Time</label>
+                        <input type="text" name="team_name" id="team_name" class="form-control" value="{{ old('team_name', $time->team_name) }}" required>
                     </div>
-
-                    <!-- Sigla -->
                     <div class="mb-3">
-                        <label for="sigla" class="form-label">Sigla</label>
-                        <input type="text" name="sigla" id="sigla" class="form-control" maxlength="5" value="{{ $time->sigla }}" required>
+                        <label for="team_sigle" class="form-label">Sigla</label>
+                        <input type="text" name="team_sigle" id="team_sigle" class="form-control" maxlength="5" value="{{ old('team_sigle', $time->team_sigle) }}" required>
                     </div>
-
-                    <!-- ID do ADM -->
+                    @if($time->team_symbol)
+                        <div class="mb-3">
+                            <label class="form-label">Logo Atual:</label><br>
+                            <img src="data:image/png;base64,{{ $time->team_symbol }}" alt="Logo" width="100">
+                        </div>
+                    @endif
                     <div class="mb-3">
-                        <label for="adm_id" class="form-label">ID do ADM</label>
-                        <input type="number" name="adm_id" id="adm_id" class="form-control" value="{{ $time->adm_id }}" required>
+                        <label for="team_logo" class="form-label">Nova Logo (opcional, PNG)</label>
+                        <input type="file" name="team_logo" id="team_logo" accept="image/png" class="form-control">
                     </div>
-
-                    <!-- Logo atual -->
-                    <div class="mb-3">
-                        <label class="form-label">Logo Atual:</label><br>
-                        <img src="{{ asset('storage/' . $time->logo_path) }}" alt="Logo Atual" class="rounded mb-2" style="width: 80px; height: 80px;">
-                    </div>
-
-                    <!-- Nova Logo -->
-                    <div class="mb-3">
-                        <label for="logo" class="form-label">Nova Logo (opcional, PNG)</label>
-                        <input type="file" name="logo" id="logo" accept="image/png" class="form-control">
-                    </div>
-
-                    <!-- Botões -->
                     <div class="d-flex justify-content-between">
                         <a href="{{ route('times.list') }}" class="btn btn-secondary">Voltar</a>
                         <button type="submit" class="btn btn-success">Salvar Alterações</button>

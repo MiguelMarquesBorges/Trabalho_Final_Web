@@ -17,12 +17,12 @@ Route::middleware([CheckIsNotLogged::class])->group(
         Route::POST('/signInSubmit', [UserController::class, 'createUser'])->name('signin.submit');
         Route::POST('/loginSubmit', [AuthController::class, 'loginSubmit'])->name('login.submit');
         Route::GET('/login', [AuthController::class, 'login'])->name('login');
-        
+
     }
 );
 
 Route::middleware([CheckIsLogged::class])->group(
-    
+
     function () {
         Route::POST('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/times/create', [TeamsController::class, 'create'])->name('times.create');
@@ -32,7 +32,10 @@ Route::middleware([CheckIsLogged::class])->group(
         Route::delete('/times/{id}', [TeamsController::class, 'destroy'])->name('times.destroy');
         Route::get('/times/{id}/edit', [TeamsController::class, 'edit'])->name('times.edit');
         Route::put('/times/{id}', [TeamsController::class, 'update'])->name('times.update');
-        
+        Route::get('/teams/logo/{id}', function ($id) {
+            $team = App\Models\Team::findOrFail($id);
+            return '<img src="data:image/png;base64,' . base64_encode($team->team_symbol) . '" />';
+        })->name('teams.logo');
     }
 );
 

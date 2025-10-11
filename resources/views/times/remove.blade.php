@@ -9,6 +9,7 @@
     <div class="container mt-5">
         <div class="card shadow-sm">
             <div class="card-header bg-danger text-white">
+                <a href="{{ route('times.list') }}" class="btn btn-secondary">Voltar</a>
                 <h4 class="mb-0">Remover Times</h4>
             </div>
             <div class="card-body">

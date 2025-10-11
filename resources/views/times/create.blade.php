@@ -17,11 +17,6 @@
                     @csrf
 
                     <div class="mb-3">
-                        <label for="id" class="form-label">ID do Time</label>
-                        <input type="number" name="team_id" id="team_id" class="form-control" required>
-                    </div>
-
-                    <div class="mb-3">
                         <label for="nome" class="form-label">Nome do Time</label>
                         <input type="text" name="team_name" id="team_name" class="form-control" required>
                     </div>
@@ -37,6 +32,7 @@
                     </div>
 
                     <div class="d-flex justify-content-end">
+                        <a href="{{ route('times.list') }}" class="btn btn-secondary">Voltar</a>
                         <button type="submit" class="btn btn-success">Cadastrar</button>
                     </div>
                 </form>

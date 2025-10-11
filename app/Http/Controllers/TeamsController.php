@@ -15,24 +15,24 @@ class TeamsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nome' => 'required|string|max:20',
-            'sigla' => 'required|string|max:5',
-            'team_symbol' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'team_name' => 'required|string|max:20',
+            'team_sigle' => 'required|string|max:5',
+            'team_logo' => 'required|image|mimes:png',
         ]);
 
         $logoData = null;
-        if ($request->hasFile('team_symbol')) {
-            $logoData = file_get_contents($request->file('team_symbol')->getRealPath());
+        if ($request->hasFile('team_logo') && $request->file('team_logo')->isValid()) {
+            $image = file_get_contents($request->file('team_logo')->getRealPath());
+            $logoData = base64_encode($image);
         }
 
         Team::create([
-            'team_name'   => $request->nome,
-            'team_sigle'  => strtoupper($request->sigla),
+            'team_name' => $request->team_name,
+            'team_sigle' => strtoupper($request->team_sigle),
             'team_symbol' => $logoData,
         ]);
 
-
-        return redirect()->route('times.index')->with('success', 'Time cadastrado com sucesso!');
+        return redirect()->route('home')->with('success', 'Time cadastrado com sucesso!');
     }
 
     public function index()
@@ -58,7 +58,7 @@ class TeamsController extends Controller
 
         $time->delete();
 
-        return redirect()->route('times.remove')->with('success', 'Time removido com sucesso!');
+        return redirect()->route('times.list')->with('success', 'Time removido com sucesso!');
     }
     public function edit($id)
     {
@@ -71,35 +71,27 @@ class TeamsController extends Controller
         $time = Team::findOrFail($id);
 
         $request->validate([
-            'nome' => 'required|string|max:255',
-            'sigla' => 'required|string|max:5',
-            'adm_id' => 'required|integer',
-            'logo' => 'nullable|image|mimes:png|max:2048',
+            'team_name' => 'required|string|max:255',
+            'team_sigle' => 'required|string|max:5',
+            'team_logo' => 'nullable|image|mimes:png',
         ], [
-            'nome.required' => 'O nome do time é obrigatório.',
-            'sigla.required' => 'A sigla é obrigatória.',
-            'adm_id.required' => 'O ID do administrador é obrigatório.',
-            'logo.image' => 'A logo deve ser um arquivo PNG válido.',
+            'team_name.required' => 'O nome do time é obrigatório.',
+            'team_sigle.required' => 'A sigla é obrigatória.',
+            'team_logo.image' => 'A logo deve ser um arquivo PNG válido.',
         ]);
 
-        $time->nome = $request->nome;
-        $time->sigla = strtoupper($request->sigla);
-        $time->adm_id = $request->adm_id;
+        $time->team_name = $request->team_name;
+        $time->team_sigle = strtoupper($request->team_sigle);
 
-        if ($request->hasFile('logo')) {
-            if ($time->logo_path && \Storage::disk('public')->exists($time->logo_path)) {
-                \Storage::disk('public')->delete($time->logo_path);
-            }
-
-            $path = $request->file('logo')->store('logos', 'public');
-            $time->logo_path = $path;
+        if ($request->hasFile('team_logo')) {
+            $image = file_get_contents($request->file('team_logo')->getRealPath());
+            $time->team_symbol = $image;
         }
 
         $time->save();
 
         return redirect()->route('times.list')->with('success', 'Time atualizado com sucesso!');
     }
-
 
 }
 

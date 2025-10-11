@@ -8,51 +8,53 @@
 
     <div class="container mt-5">
         <div class="card shadow-sm">
-            <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
-                <h4 class="mb-0">Times Cadastrados</h4>
-                <a href="{{ route('times.create') }}" class="btn btn-light btn-sm">+ Cadastrar Novo Time</a>
+            <div class="card-header bg-dark text-white d-flex align-items-center justify-content-between">
+                <a href="{{ route('home') }}" class="btn btn-secondary me-2">Voltar</a>
+                <span class="h5 mb-0">Times Cadastrados</span>
+                <a href="{{ route('times.create') }}" class="btn btn-secondary me-2">Cadastrar Novo Time</a>
             </div>
 
             <div class="card-body">
-                @if(session('success'))
+                @if (session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
 
-                @if($times->isEmpty())
+                @if ($times->isEmpty())
                     <p class="text-muted text-center">Nenhum time cadastrado.</p>
                 @else
                     <div class="table-responsive">
-                        <table class="table table-striped align-middle">
-                            <thead class="table-dark">
+                        <table class="table align-middle text-center shadow-sm rounded-4 overflow-hidden">
+                            <thead class="table-dark text-white">
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Logo</th>
-                                    <th>Nome</th>
-                                    <th>Sigla</th>
-                                    <th>ID ADM</th>
-                                    <th>Ações</th>
+                                    <th scope="col" class="py-3">ID</th>
+                                    <th scope="col" class="py-3">Logo</th>
+                                    <th scope="col" class="py-3">Nome</th>
+                                    <th scope="col" class="py-3">Sigla</th>
+                                    <th scope="col" class="py-3">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($times as $time)
-                                    <tr>
-                                        <td>{{ $time->id }}</td>
-                                        <td>
-                                            <img src="data:image/png;base64,{{ base64_encode($team->team_symbol) }}" alt="Logo do Time">
+                                @foreach ($times as $time)
+                                    <tr class="align-middle table-light">
+                                        <td class="border-end">{{ $time->id }}</td>
+                                        <td class="border-end">
+                                            <img src="data:image/png;base64,{{ $time->team_symbol }}" alt="Logo"
+                                                class="img-thumbnail rounded-4" width="100">
                                         </td>
-                                        <td>{{ $time->nome }}</td>
-                                        <td>{{ $time->sigla }}</td>
-                                        <td>{{ $time->adm_id }}</td>
-                                        <td>
-                                            <div class="d-flex gap-2">
-                                                <a href="{{ route('times.edit', $time->id) }}" class="btn btn-sm btn-warning">
+                                        <td class="border-end">{{ $time->team_name }}</td>
+                                        <td class="border-end">{{ $time->team_sigle }}</td>
+                                        <td class="border-end">
+                                            <div class="d-flex justify-content-center gap-2">
+                                                <a href="{{ route('times.edit', $time->id) }}"
+                                                    class="btn btn-warning btn-sm rounded-pill shadow-sm">
                                                     Editar
                                                 </a>
                                                 <form action="{{ route('times.destroy', $time->id) }}" method="POST"
-                                                      onsubmit="return confirm('Tem certeza que deseja remover este time?')">
+                                                    onsubmit="return confirm('Tem certeza que deseja remover este time?')">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger">
+                                                    <button type="submit"
+                                                        class="btn btn-danger btn-sm rounded-pill shadow-sm">
                                                         Remover
                                                     </button>
                                                 </form>
