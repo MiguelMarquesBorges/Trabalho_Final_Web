@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TeamsController;
+use App\Http\Controllers\PlayerController;
 use App\Http\Middleware\CheckIsLogged;
 use App\Http\Middleware\CheckIsNotLogged;
 
@@ -17,6 +18,7 @@ Route::middleware([CheckIsNotLogged::class])->group(
         Route::POST('/signInSubmit', [UserController::class, 'createUser'])->name('signin.submit');
         Route::POST('/loginSubmit', [AuthController::class, 'loginSubmit'])->name('login.submit');
         Route::GET('/login', [AuthController::class, 'login'])->name('login');
+        Route::get('/guest-login', [AuthController::class, 'guestLogin'])->name('guest.login');
 
     }
 );
@@ -36,6 +38,12 @@ Route::middleware([CheckIsLogged::class])->group(
             $team = App\Models\Team::findOrFail($id);
             return '<img src="data:image/png;base64,' . base64_encode($team->team_symbol) . '" />';
         })->name('teams.logo');
+        Route::get('/jogadores/{time_id}', [PlayerController::class, 'list'])->name('jogadores.list');
+        Route::get('/jogadores/{time_id}/create', [PlayerController::class, 'create'])->name('jogadores.create');
+        Route::post('/jogadores/{time_id}', [PlayerController::class, 'store'])->name('jogadores.store');
+        Route::get('/jogadores/editar/{id}', [PlayerController::class, 'edit'])->name('jogadores.edit');
+        Route::put('/jogadores/{id}', [PlayerController::class, 'update'])->name('jogadores.update');
+        Route::delete('/jogadores/{id}', [PlayerController::class, 'destroy'])->name('jogadores.destroy');
     }
 );
 

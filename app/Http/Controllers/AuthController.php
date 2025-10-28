@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
@@ -11,29 +11,24 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function login(){
+    public function login()
+    {
         return view('user.login');
     }
 
-    public function loginSubmit(Request $request){
+    public function loginSubmit(Request $request)
+    {
 
         $username = $request->text_username;
         $password = $request->text_password;
 
-        //Testar se o usuario é válido
-        $usuario = User::where('username',$username)
-                        ->whereNull('deleted_at')
-                        ->first();
-        if(!$usuario){
-            return redirect()->back()
-                ->withInput() //preservar os dados
-                ->with('login_error','Usuário ou senha incorretos.');
-        }
-        
+        $usuario = User::where('username', $username)
+            ->whereNull('deleted_at')
+            ->first();
         if (!$usuario || !Hash::check($request->text_password, $usuario->password)) {
             return redirect()->back()
-                             ->withInput()
-                             ->with('login_error', 'Usuário ou senha incorretos.');
+                ->withInput()
+                ->with('login_error', 'Usuário ou senha incorretos.');
         }
 
         $usuario->last_login = Date('Y-m-d H:i:s');
@@ -42,15 +37,30 @@ class AuthController extends Controller
         session([
             'user' => [
                 'id' => $usuario->id,
-                'username' => $usuario->username
+                'username' => $usuario->username,
+                'is_guest' => false
             ]
-            ]);
+        ]);
 
-            return redirect()->route('home');
+        return redirect()->route('home');
 
     }
 
-    public function logout(){
+    public function guestLogin()
+    {
+        session([
+            'user' => [
+                'username' => 'Convidado',
+                'is_guest' => true
+            ]
+        ]);
+
+        return redirect()->route('times.list')->with('success', 'Você entrou como convidado!');
+    }
+
+
+    public function logout()
+    {
         session()->forget('user');
         return redirect()->route('home');
     }
