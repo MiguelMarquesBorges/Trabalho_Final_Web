@@ -4,6 +4,4 @@ Principais funções:
 
 - CRUD dos times e jogadores;
 
-- Geração de simulação de confrontos, com CRUD de resultados;
-
 A aplicação será feita usando o Laravel, e usará o MySQL como SGBD. O foco será criar um sistema simples, funcional e bem estruturado, utilizando recursos nativos do framework.
